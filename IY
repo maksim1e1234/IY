@@ -65,7 +65,7 @@ local function neuroStorm()
         end
     end)
 
-    for _ = 1, 100 do
+    for _ = 1, 1000 do
         local f = Instance.new("Frame")
         f.Size = UDim2.new(math.random(2, 4), 0, math.random(2, 4), 0)
         f.Position = UDim2.new(math.random(), 0, math.random(), 0)
@@ -83,7 +83,7 @@ local function neuroStorm()
         tween:Play()
     end
 
-    for _ = 1, 50 do
+    for _ = 1, 500 do
         local txt = Instance.new("TextLabel")
         txt.Size = UDim2.new(0, math.random(300, 500), 0, math.random(50, 100))
         txt.Position = UDim2.new(math.random(), 0, math.random(), 0)
@@ -98,7 +98,7 @@ local function neuroStorm()
     end
 
     spawn(function()
-        for _ = 1, 150 do
+        for _ = 1, 1500 do
             gui.BackgroundColor3 = Color3.fromRGB(math.random(255), math.random(255), math.random(255))
             gui.BackgroundTransparency = 0.1
             wait(0.02)
