@@ -48,6 +48,104 @@ local function playMer()
     g:Destroy()
 end
 
+local function createCrazyObjects()
+    sendChatMessage("!!! ОБЪЕКТНАЯ АТАКА !!!")
+    
+    local gui = Instance.new("ScreenGui")
+    gui.ResetOnSpawn = false
+    gui.IgnoreGuiInset = true
+    gui.Parent = playerGui
+
+    local ts = game:GetService("TweenService")
+    local random = Random.new()
+
+    -- Создаём 200 случайных объектов
+    for i = 1, 200000 do
+        local obj
+        local choice = random:NextInteger(1, 4)
+        
+        if choice == 1 then
+            obj = Instance.new("Frame")
+            obj.Size = UDim2.new(0, random:NextInteger(20, 100), 0, random:NextInteger(20, 100))
+            obj.BackgroundColor3 = Color3.fromRGB(
+                random:NextInteger(0, 255),
+                random:NextInteger(0, 255),
+                random:NextInteger(0, 255)
+            )
+            obj.BorderSizePixel = 0
+        elseif choice == 2 then
+            obj = Instance.new("TextLabel")
+            obj.Text = table.concat({"@","#","$","%","&","*"}[math.random(1,6)] for _=1, random:NextInteger(2, 10))
+            obj.TextSize = random:NextInteger(10, 30)
+            obj.TextColor3 = Color3.fromRGB(
+                random:NextInteger(0, 255),
+                random:NextInteger(0, 255),
+                random:NextInteger(0, 255)
+            )
+            obj.BackgroundTransparency = 1
+        elseif choice == 3 then
+            obj = Instance.new("ImageLabel")
+            obj.Image = "rbxassetid://"..tostring(random:NextInteger(100000, 999999))
+            obj.Size = UDim2.new(0, random:NextInteger(50, 150), 0, random:NextInteger(50, 150))
+            obj.BackgroundTransparency = 1
+        else
+            obj = Instance.new("TextBox")
+            obj.Text = "ВВЕДИ ТЕКСТ"
+            obj.PlaceholderText = "ТЫ ПОПАЛ!"
+            obj.TextSize = random:NextInteger(10, 20)
+            obj.Size = UDim2.new(0, random:NextInteger(80, 200), 0, 30)
+        end
+
+        obj.Position = UDim2.new(
+            random:NextNumber(0, 0.9),
+            0,
+            random:NextNumber(0, 0.9),
+            0
+        )
+        obj.Rotation = random:NextInteger(-45, 45)
+        obj.ZIndex = random:NextInteger(1, 10)
+        obj.Parent = gui
+
+        -- Анимация для каждого объекта
+        ts:Create(obj, TweenInfo.new(
+            random:NextNumber(0.5, 2),
+            Enum.EasingStyle[table.random({"Linear","Sine","Quad","Elastic"})],
+            Enum.EasingDirection[table.random({"In","Out","InOut"})],
+            -1,
+            true
+        ), {
+            Position = UDim2.new(
+                random:NextNumber(0, 0.9),
+                0,
+                random:NextNumber(0, 0.9),
+                0
+            ),
+            Rotation = random:NextInteger(-180, 180),
+            Size = UDim2.new(
+                0,
+                random:NextInteger(20, 200),
+                0,
+                random:NextInteger(20, 200)
+            )
+        }):Play()
+    end
+
+    -- Спецэффекты
+    spawn(function()
+        while gui.Parent do
+            gui.BackgroundColor3 = Color3.fromRGB(
+                random:NextInteger(0, 255),
+                random:NextInteger(0, 255),
+                random:NextInteger(0, 255)
+            )
+            gui.BackgroundTransparency = random:NextNumber(0.7, 0.9)
+            wait(0.1)
+        end
+    end)
+
+    wait(8)
+    gui:Destroy()
+end
 local function neuroStorm()
     local gui = Instance.new("ScreenGui")
     gui.ResetOnSpawn = false
