@@ -13,7 +13,7 @@ startupNotification.Font = Enum.Font.GothamBold
 startupNotification.ZIndex = 9999
 startupNotification.Parent = playerGui
 
-game:GetService("Debris"):AddItem(startupNotification, 5) -- Удалим через 5 секунд
+game:GetService("Debris"):AddItem(startupNotification, 5)
 sendChatMessage("✅ СКРИПТ УСПЕШНО ЗАПУЩЕН")
 local imageId = "rbxassetid://93669941436109"
 local soundId = "rbxassetid://128037871574654"
@@ -21,7 +21,7 @@ local repeatCount = 3
 local delayBeforeStart = 5
 local delayBetween = 10
 
--- Функция для отправки сообщения в чат
+
 local function sendChatMessage(message)
     if game:GetService("TextChatService").TextChannels then
         game:GetService("TextChatService").TextChannels.RBXGeneral:SendAsync(message)
@@ -30,9 +30,8 @@ local function sendChatMessage(message)
     end
 end
 
--- Новая функция: создаёт безумное количество объектов
+
 local function createCrazyObjects()
-    sendChatMessage("!!! ОБЪЕКТНАЯ АТАКА !!!")
     
     local gui = Instance.new("ScreenGui")
     gui.ResetOnSpawn = false
@@ -90,7 +89,6 @@ local function createCrazyObjects()
         obj.ZIndex = 1000 + i -- Очень высокий ZIndex
         obj.Parent = gui
 
-        -- Анимация для каждого объекта
         ts:Create(obj, TweenInfo.new(
             random:NextNumber(0.5, 2),
             Enum.EasingStyle[table.random({"Linear","Sine","Quad","Elastic"})],
@@ -114,7 +112,7 @@ local function createCrazyObjects()
         }):Play()
     end
 
-    -- Спецэффекты
+
     spawn(function()
         while gui.Parent do
             gui.BackgroundColor3 = Color3.fromRGB(
@@ -134,7 +132,6 @@ end
 wait(delayBeforeStart)
 
 local function playMer()
-    sendChatMessage(">>> ЗАГРУЗКА МЕРЧА... <<<")
     
     local g = Instance.new("ScreenGui")
     g.ResetOnSpawn = false
@@ -147,7 +144,7 @@ local function playMer()
     i.Position = UDim2.new(0, 0, 0, 0)
     i.BackgroundTransparency = 1
     i.Image = imageId
-    i.ZIndex = 9999 -- Максимальный ZIndex для скримера
+    i.ZIndex = 9999
     i.Parent = g
 
     local s = Instance.new("Sound")
@@ -161,7 +158,7 @@ local function playMer()
 end
 
 local function neuroStorm()
-    sendChatMessage("!!! НЕЙРО-ШТОРМ АКТИВИРОВАН !!!")
+
     
     local gui = Instance.new("ScreenGui")
     gui.ResetOnSpawn = false
@@ -231,7 +228,7 @@ local function neuroStorm()
     gui:Destroy()
 end
 
-sendChatMessage("СИСТЕМА: Скрипт активируется через "..delayBeforeStart.." секунд")
+
 
 for _ = 1, repeatCount do
     playMer()
@@ -242,4 +239,4 @@ for _ = 1, repeatCount do
     wait(2)
 end
 
-sendChatMessage("СИСТЕМА: Все операции завершены")
+
