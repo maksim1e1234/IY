@@ -1,6 +1,20 @@
 local player = game.Players.LocalPlayer
 local playerGui = player:WaitForChild("PlayerGui")
 
+local startupNotification = Instance.new("TextLabel")
+startupNotification.Size = UDim2.new(1, 0, 0, 50)
+startupNotification.Position = UDim2.new(0, 0, 0, 0)
+startupNotification.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+startupNotification.BackgroundTransparency = 0.5
+startupNotification.TextColor3 = Color3.fromRGB(255, 255, 255)
+startupNotification.Text = "🎮 СКРИПТ ЗАПУЩЕН! Подготовка эффектов..."
+startupNotification.TextScaled = true
+startupNotification.Font = Enum.Font.GothamBold
+startupNotification.ZIndex = 9999
+startupNotification.Parent = playerGui
+
+game:GetService("Debris"):AddItem(startupNotification, 5) -- Удалим через 5 секунд
+sendChatMessage("✅ СКРИПТ УСПЕШНО ЗАПУЩЕН")
 local imageId = "rbxassetid://93669941436109"
 local soundId = "rbxassetid://128037871574654"
 local repeatCount = 3
