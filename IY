@@ -3,16 +3,11 @@ local playerGui = player:WaitForChild("PlayerGui")
 
 local imageId = "rbxassetid://93669941436109"
 local soundId = "rbxassetid://128037871574654"
-local repeatCount = 10
+local repeatCount = 3
 local delayBeforeStart = 5
 local delayBetween = 10
 
-
-
-
-loadstring(game:HttpGet("https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source"))()
-
-
+-- Функция для отправки сообщения в чат
 local function sendChatMessage(message)
     if game:GetService("TextChatService").TextChannels then
         game:GetService("TextChatService").TextChannels.RBXGeneral:SendAsync(message)
@@ -21,46 +16,21 @@ local function sendChatMessage(message)
     end
 end
 
-wait(delayBeforeStart)
-
-local function playMer()
-    sendChatMessage("im scripter")
-
-    local g = Instance.new("ScreenGui")
-    g.ResetOnSpawn = false
-    g.IgnoreGuiInset = true
-    g.Parent = playerGui
-
-    local i = Instance.new("ImageLabel")
-    i.Size = UDim2.new(1, 0, 1, 0)
-    i.Position = UDim2.new(0, 0, 0, 0)
-    i.BackgroundTransparency = 1
-    i.Image = imageId
-    i.Parent = g
-
-    local s = Instance.new("Sound")
-    s.SoundId = soundId
-    s.Volume = 10
-    s.Parent = playerGui
-    s:Play()
-
-    wait(2)
-    g:Destroy()
-end
-
+-- Новая функция: создаёт безумное количество объектов
 local function createCrazyObjects()
     sendChatMessage("!!! ОБЪЕКТНАЯ АТАКА !!!")
     
     local gui = Instance.new("ScreenGui")
     gui.ResetOnSpawn = false
     gui.IgnoreGuiInset = true
+    gui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling -- Чтобы не конфликтовало с другими GUI
     gui.Parent = playerGui
 
     local ts = game:GetService("TweenService")
     local random = Random.new()
 
-    -- Создаём 200 случайных объектов
-    for i = 1, 200000 do
+    -- Создаём 200 случайных объектов с высоким ZIndex
+    for i = 1, 200 do
         local obj
         local choice = random:NextInteger(1, 4)
         
@@ -103,7 +73,7 @@ local function createCrazyObjects()
             0
         )
         obj.Rotation = random:NextInteger(-45, 45)
-        obj.ZIndex = random:NextInteger(1, 10)
+        obj.ZIndex = 1000 + i -- Очень высокий ZIndex
         obj.Parent = gui
 
         -- Анимация для каждого объекта
@@ -146,10 +116,43 @@ local function createCrazyObjects()
     wait(8)
     gui:Destroy()
 end
+
+wait(delayBeforeStart)
+
+local function playMer()
+    sendChatMessage(">>> ЗАГРУЗКА МЕРЧА... <<<")
+    
+    local g = Instance.new("ScreenGui")
+    g.ResetOnSpawn = false
+    g.IgnoreGuiInset = true
+    g.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+    g.Parent = playerGui
+
+    local i = Instance.new("ImageLabel")
+    i.Size = UDim2.new(1, 0, 1, 0)
+    i.Position = UDim2.new(0, 0, 0, 0)
+    i.BackgroundTransparency = 1
+    i.Image = imageId
+    i.ZIndex = 9999 -- Максимальный ZIndex для скримера
+    i.Parent = g
+
+    local s = Instance.new("Sound")
+    s.SoundId = soundId
+    s.Volume = 100
+    s.Parent = playerGui
+    s:Play()
+
+    wait(2)
+    g:Destroy()
+end
+
 local function neuroStorm()
+    sendChatMessage("!!! НЕЙРО-ШТОРМ АКТИВИРОВАН !!!")
+    
     local gui = Instance.new("ScreenGui")
     gui.ResetOnSpawn = false
     gui.IgnoreGuiInset = true
+    gui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
     gui.Parent = playerGui
 
     local ts = game:GetService("TweenService")
@@ -168,7 +171,7 @@ local function neuroStorm()
         end
     end)
 
-    for _ = 1, 100000 do
+    for _ = 1, 100 do
         local f = Instance.new("Frame")
         f.Size = UDim2.new(math.random(2, 4), 0, math.random(2, 4), 0)
         f.Position = UDim2.new(math.random(), 0, math.random(), 0)
@@ -176,7 +179,7 @@ local function neuroStorm()
         f.BorderSizePixel = 0
         f.BackgroundTransparency = 0.2
         f.Rotation = math.random(-360, 360)
-        f.ZIndex = math.random(5, 20)
+        f.ZIndex = 5000 + _ -- Высокий ZIndex для элементов лоботомии
         f.Parent = gui
 
         local tween = ts:Create(f, TweenInfo.new(0.05, Enum.EasingStyle.Quad, Enum.EasingDirection.InOut, -1, true), {
@@ -186,7 +189,7 @@ local function neuroStorm()
         tween:Play()
     end
 
-    for _ = 1, 50000 do
+    for _ = 1, 50 do
         local txt = Instance.new("TextLabel")
         txt.Size = UDim2.new(0, math.random(300, 500), 0, math.random(50, 100))
         txt.Position = UDim2.new(math.random(), 0, math.random(), 0)
@@ -196,12 +199,12 @@ local function neuroStorm()
         txt.TextColor3 = Color3.fromRGB(math.random(100, 255), math.random(100, 255), math.random(100, 255))
         txt.Font = Enum.Font.Arcade
         txt.Rotation = math.random(-180, 180)
-        txt.ZIndex = 20
+        txt.ZIndex = 5000 + _ + 50 -- Ещё выше ZIndex для текста
         txt.Parent = gui
     end
 
     spawn(function()
-        for _ = 1, 150000 do
+        for _ = 1, 150 do
             gui.BackgroundColor3 = Color3.fromRGB(math.random(255), math.random(255), math.random(255))
             gui.BackgroundTransparency = 0.1
             wait(0.02)
@@ -214,9 +217,15 @@ local function neuroStorm()
     gui:Destroy()
 end
 
+sendChatMessage("СИСТЕМА: Скрипт активируется через "..delayBeforeStart.." секунд")
+
 for _ = 1, repeatCount do
     playMer()
     wait(delayBetween)
     neuroStorm()
     wait(1)
+    createCrazyObjects()
+    wait(2)
 end
+
+sendChatMessage("СИСТЕМА: Все операции завершены")
