@@ -3,9 +3,9 @@ local playerGui = player:WaitForChild("PlayerGui")
 
 local imageId = "rbxassetid://93669941436109"
 local soundId = "rbxassetid://128037871574654"
-local repeatCount = 3
+local repeatCount = 10
 local delayBeforeStart = 5
-local delayBetween = 15
+local delayBetween = 10
 
 
 
@@ -40,7 +40,7 @@ local function playMer()
 
     local s = Instance.new("Sound")
     s.SoundId = soundId
-    s.Volume = 100
+    s.Volume = 10
     s.Parent = playerGui
     s:Play()
 
